@@ -28,9 +28,16 @@ alter table svecenik add foreign key(nadredeni) references svecenik(sifra);
 alter table sluzba add foreign key(svecenik) references svecenik(sifra);
 alter table sluzba add foreign key(posao) references posao(sifra);
 
-insert into svecenik (ime,prezime)
-values ('Pero', 'Perić'),('Ivo', 'Ivić'),('Ivan ', 'Dubravac'),('Dorijan', 'Garac'),('Shibel', 'Ageel'),
-('Nikola', 'Juzbašić'),('Andrija', 'Aziinić'),('Dominik', 'Talavanić');
+insert into svecenik (ime,prezime,nadredeni)
+values ('Dominik', 'Talavanić',null),
+('Ivo', 'Ivić',1),
+('Ivan ', 'Dubravac',1),
+('Dorijan', 'Garac',2),
+('Shibel', 'Ageel',3),
+('Nikola', 'Juzbašić',5),
+('Andrija', 'Azinić',5),
+('Pero', 'Perić',7);
+
 
 insert into posao (opis,vrijeme,mjesto)
 values('Nedjeljna misa', '2022-05-04 8:00:00', 'Osijek'),
