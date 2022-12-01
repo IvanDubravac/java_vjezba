@@ -5,61 +5,48 @@ drop database if exists protokrobe;
 create database protokrobe;
 use protokrobe;
 
-create table osoba(
+
+ create table zaposlenik(
     sifra int not null primary key auto_increment,
     ime varchar(50) not null,
     prezime varchar(50) not null,
-    oib char(11)
-
-);
- create table zaposlenik(
-    sifra int not null primary key auto_increment,
-    osoba int,
+    oib char(11),
     iban varchar(35),
     nadredeni int 
 
  );
 
-create table skladiste(
+create table promet(
     sifra int not null primary key auto_increment,
     proizvod int,
     kolicina int,
     vrijeme_dopreme TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     vrijeme_otpreme TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    zaposlenik int
-);
+    zaposlenik int,
+    vrsta int
 
-create table prehrambeni_proizvod(
-    sifra int not null primary key auto_increment,
-    naziv varchar(50) not null,
-    cijena decimal(5,2),
-    rok_trajanja datetime,
-    zemlja_podrijetla varchar(30),
-    neto_kolicina int
-);
-
-create table neprehrambeni_proizvod(
-    sifra int not null primary key auto_increment,
-    naziv varchar(50) not null,
-    cijena decimal(5,2),
-    rok_trajanja datetime,
-    zemlja_podrijetla varchar(30),
-    neto_kolicina int
 );
 
 create table proizvod(
     sifra int not null primary key auto_increment,
-    prehrambeni_proizvod int,
-    neprehrambeni_proizvod int 
+    naziv varchar(50) not null,
+    cijena decimal(5,2),
+    rok_trajanja datetime,
+    zemlja_podrijetla varchar(30),
+    neto_kolicina int
 );
 
-alter table proizvod add foreign key (prehrambeni_proizvod) references prehrambeni_proizvod(sifra);
-alter table proizvod add foreign key (neprehrambeni_proizvod) references neprehrambeni_proizvod(sifra);
 
-alter table skladiste add foreign key (proizvod) references proizvod(sifra);
-alter table skladiste add foreign key (zaposlenik) references zaposlenik(sifra);
+create table vrsta(
+    sifra int not null primary key auto_increment,
+    naziv varchar(20),
+    predznak int
+);
 
-alter table zaposlenik add foreign key (osoba) references osoba(sifra);
+
+alter table promet add foreign key (proizvod) references proizvod(sifra);
+alter table promet add foreign key (zaposlenik) references zaposlenik(sifra);
+alter table promet add foreign key (vrsta) references vrsta(sifra);
 alter table zaposlenik add foreign key (nadredeni) references zaposlenik(sifra);
 
 
