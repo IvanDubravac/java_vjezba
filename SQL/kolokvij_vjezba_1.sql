@@ -107,7 +107,7 @@ values (1,1),(2,2),(3,3);
 
 select * from cura ;
 update cura set gustoca=15.77
-where gustoca=null;
+where gustoca is null;
 
 select * from mladic ;
 
@@ -132,4 +132,4 @@ order by 3 desc ;
 select a.haljina , a.maraka 
 from sestra a
 left join sestra_svekar b on a.sifra=b.sestra
-where b.sifra is null ;
+where b.mladic is null ;
