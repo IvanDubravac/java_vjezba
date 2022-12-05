@@ -129,4 +129,4 @@ order by e.kuna desc ;
 select a.haljina, a.lipa 
 from prijatelj a 
 left join prijatelj_brat b on a.sifra=b.brat 
-where b.prijatelj is null ;
+where b.sifra is null ;
