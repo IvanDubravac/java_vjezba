@@ -131,4 +131,4 @@ order by b.haljina desc;
 select a.vesta , a.asocijalno 
 from decko a
 left join decko_zarucnica b on a.sifra =b.decko 
-where b.decko is null ;
+where b.sifra is null ;

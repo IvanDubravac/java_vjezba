@@ -132,4 +132,4 @@ order by 3 desc ;
 select a.haljina , a.maraka 
 from sestra a
 left join sestra_svekar b on a.sifra=b.sestra
-where b.mladic is null ;
+where b.sifra is null ;
