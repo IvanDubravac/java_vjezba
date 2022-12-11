@@ -77,3 +77,43 @@ alter table becar add foreign key(muskarac) references muskarac (sifra);
 alter table muskarac_decko add foreign key(muskarac) references muskarac(sifra);
 alter table muskarac_decko add foreign key(decko) references decko(sifra);
 alter table cura add foreign key(prijateljica) references prijateljica(sifra);
+
+
+insert into decko (treciputa,ogrlica,ekstrovertno)
+values(2022,15,1),(2022,15,1),(2022,15,1);
+
+insert into muskarac (drugiputa)
+values(1695),(1695),(1695);
+
+insert into muskarac_decko (muskarac,decko)
+values(1,1),(1,1),(1,1);
+
+insert into becar (eura,muskarac)
+values(123.6, 1),(123.6, 1),(123.6, 1);
+
+insert into neprijatelj (ogrlica, becar)
+values(4,1),(4,1),(4,1);
+
+update cura set indiferentno=false 
+where sifra is not null ;
+
+delete from brat 
+where novcica !=12.75;
+
+select priviputa from becar 
+where treciputa is null ;
+
+select f.bojakose , a.neprijatelj , b.introvertno 
+from brat a 
+inner join neprijatelj b on b.sifra = a.neprijatelj 
+inner join becar c on c.sifra= b.becar 
+inner join muskarac d on d.sifra = c.muskarac 
+inner join muskarac_decko e on e.muskarac=d.sifra 
+inner join decko f on f.sifra =e.decko 
+where c.treciputa is not null and d.drugiputa is not null 
+order by b.introvertno desc ;
+
+select a.drugiputa , a.treciputa 
+from muskarac a
+left join muskarac_decko b on a.sifra=b.muskarac 
+where b.sifra is null ;
