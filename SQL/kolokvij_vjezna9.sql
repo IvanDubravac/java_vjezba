@@ -81,3 +81,45 @@ alter table cura add foreign key(punac) references punac(sifra);
 alter table punac_prijateljica add foreign key(punac) references punac(sifra);
 alter table punac_prijateljica add foreign key(prijateljica) references prijateljica(sifra);
 
+
+
+insert into punac (narukvica)
+values(5),(5),(5);
+
+insert into prijateljica (kuna)
+values(15.8),(15.8),(15.8);
+
+insert into punac_prijateljica (punac,prijateljica )
+values(1,1),(1,1),(1,1);
+
+insert into cura (vesta,suknja,punac)
+values('crvena','plava',1),('crvena','plava',1),
+('crvena','plava',1);
+
+insert into brat (novcica,vesta)
+values(15.8,'roza'),(15.8,'roza'),(15.8,'roza');
+
+update snasa set drugiputa=2020-04-14
+where sifra is not null ;
+
+delete from zarucnik 
+where haljina ='AB';
+
+select carape from cura 
+where ekstrovertno is null ;
+
+select a.kuna , f.nausnica , e.ekstrovertno 
+from prijateljica a
+inner join punac_prijateljica b on a.sifra =b.prijateljica 
+inner join punac c on c.sifra =b.punac 
+inner join cura d on c.sifra =d.punac 
+inner join brat e on e.cura =d.sifra 
+inner join zarucnik f on f.brat =e.sifra 
+where d.ekstrovertno is not null and c.modelnaocala like '%ba%'
+order by e.ekstrovertno desc ;
+
+
+select a.modelnaocala , a.kuna 
+from punac a
+left join punac_prijateljica b on a.sifra =b.punac 
+where b.sifra is null ;
