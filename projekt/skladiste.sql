@@ -1,4 +1,4 @@
-# c:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\marko\Documents\java_vjezba\SQL\skladiste.sql
+# c:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\marko\Documents\java_vjezba\projekt\skladiste.sql
 #pravljenje era dijagrama
 
 drop database if exists protokrobe;
@@ -47,6 +47,19 @@ alter table promet add foreign key (proizvod) references proizvod(sifra);
 alter table promet add foreign key (zaposlenik) references zaposlenik(sifra);
 alter table promet add foreign key (vrsta) references vrsta(sifra);
 alter table zaposlenik add foreign key (nadredeni) references zaposlenik(sifra);
+
+
+insert into zaposlenik (ime,prezime,nadredeni)
+values('Ivan', 'Dubravac', null),
+('Andrija', 'Azinić', 1),
+('Nikola', 'Juzbašić', 1),
+('Sara', 'Lutring', 1),
+('Antonela ', 'Pavić', 1);
+
+
+insert into vrsta (naziv,predznak)
+values('doprema', 1),
+('otprema', (-1));
 
 
 
