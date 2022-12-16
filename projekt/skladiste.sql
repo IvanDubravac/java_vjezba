@@ -20,8 +20,7 @@ create table promet(
     sifra int not null primary key auto_increment,
     proizvod int,
     kolicina int,
-    vrijeme_dopreme TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    vrijeme_otpreme TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    vrijeme TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     zaposlenik int,
     vrsta int
 
