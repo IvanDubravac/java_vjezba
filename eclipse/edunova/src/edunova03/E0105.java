@@ -55,7 +55,7 @@ public class E0105 {
 		}
 		
 		*/
-		
+	/*	
 	int t[]= new int[3];
 	t[0]=1;
 	t[1]=2;
@@ -84,8 +84,14 @@ public class E0105 {
 	System.out.println(tb[1][1]);
 	
 	
+	*/
+	
+		if(args.length!=2) {
+			System.out.println("Obavezno dva parametra");
+			return;
+		}
 		
-		
+		System.out.println("Izvodim program");
 	
 		
 		
