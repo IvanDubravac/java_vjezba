@@ -3,7 +3,7 @@ package edunova03;
 public class E0105 {
 	
 	public static void main(String[] args) {
-		
+	/*
 		boolean uvjet=true;
 		
 		if(uvjet) {
@@ -27,6 +27,37 @@ public class E0105 {
 		}else {
 			System.out.println("Ništa");
 		}
+	*/
+		int ocjena=33 ; 
+		
+		switch(ocjena) {
+		case 1:
+			System.out.println("Nedovoljan");
+			break;
+		case 2:
+			System.out.println("Dovoljan");
+			break;
+		case 3:
+			System.out.println("Dobar");
+			break;
+		case 4:
+			System.out.println("Vrlo dobar");
+			break;
+		case 5:
+			System.out.println("Odličan");
+			break;
+		default: {
+			System.out.println("Nije ocjena");
+		}
+		}
+		
+		
+		
+		
+		
+
+		
+		
 	}
 
 }
