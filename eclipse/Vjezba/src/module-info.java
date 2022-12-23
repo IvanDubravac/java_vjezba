@@ -6,4 +6,6 @@
  *
  */
 module Novi_projekt {
+	requires java.desktop;
+	
 }
