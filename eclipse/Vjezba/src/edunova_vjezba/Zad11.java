@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 public class Zad11 {
 	public static void main(String[] args) {
 		int polje[] = new int[50];
-		int najmanji ;
-		int najveci ;
+		int najmanji = 0;
+		int najveci = 0;
 		int zbroj = 0;
 		for (int i = 0; i < 24; i++) {
 			int broj = Integer.parseInt(JOptionPane.showInputDialog("Unesi" + " " + (i + 1) + "." + " broj "));
