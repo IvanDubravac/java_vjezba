@@ -7,14 +7,23 @@ public class CiklicnaMatrica {
 		int redak = Integer.parseInt(JOptionPane.showInputDialog("Unesite broj redaka"));
 		int stupac = Integer.parseInt(JOptionPane.showInputDialog("Unesite broj stupaca"));
 		int matrica[][] = new int[redak][stupac];
-		int zadnji=0;
+		int zadnji = 0;
 		for (int a = 1; a <= stupac; a++) {
 			matrica[redak - 1][stupac - a] = a;
-			zadnji=a;
+			zadnji = a;
 
 		}
-		for (int i = redak-1; i >=0; i--) {
-				matrica[i][0] = zadnji++;
+		for (int i = redak - 1; i >= 0; i--) {
+			matrica[i][0] = zadnji++;
+		
+		}
+		for (int a = 1; a < stupac; a++) {
+			matrica[0][a] = zadnji++;
+		}
+		
+		for (int i = 1 ; i < redak-1; i++) {
+			matrica[i][stupac-1] = zadnji++;
+		
 		}
 		for (int i = 0; i < redak; i++) {
 			for (int j = 0; j < stupac; j++) {
