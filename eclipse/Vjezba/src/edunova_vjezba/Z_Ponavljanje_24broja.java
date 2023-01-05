@@ -12,8 +12,8 @@ public class Z_Ponavljanje_24broja {
 			int broj = Integer.parseInt(JOptionPane.showInputDialog("Unesite" + " " + (i + 1) + ". " + "broj"));
 			polje[i] = broj;
 			zbroj += broj;
-			najmanji=polje[0];
-			najveci=polje[0];
+			najmanji = polje[0];
+			najveci = polje[0];
 
 			if (polje[i] < polje[i + 1]) {
 				najmanji = polje[i];
