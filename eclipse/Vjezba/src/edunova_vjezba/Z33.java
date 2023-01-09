@@ -8,6 +8,7 @@ public class Z33 {
 		int broj1 = Integer.parseInt(JOptionPane.showInputDialog("Unesite prvi broj"));
 		int broj2 = Integer.parseInt(JOptionPane.showInputDialog("Unesite drugi broj"));
 		int min, max;
+		boolean prim;
 		if (broj1 < broj2) {
 			min = broj1;
 			max = broj2;
@@ -15,16 +16,18 @@ public class Z33 {
 			min = broj2;
 			max = broj1;
 		}
+		
+
 		for (int i = min; i < max; i++) {
-			int brojac = 0;
+			prim=true;
 			for (int j = 2; j < i; j++) {
 				if (i % j == 0) {
-					brojac++;
-
+					prim=false;
+					
 				}
 
 			}
-			if (brojac == 0) {
+			if (prim) {
 				System.out.println(i);
 			}
 
