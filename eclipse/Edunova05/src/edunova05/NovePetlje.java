@@ -22,17 +22,29 @@ public class NovePetlje {
 //				break;
 //			}
 //		}
-	
-		int b=0;
-		while(true) {
-			b=Integer.parseInt(JOptionPane.showInputDialog("Unesite broj između 1 i 10"));
-			if(b>=1 && b<=10) {
-				break;
-			}
-			
-		}
+//	
+//		int b=0;
+//		while(true) {
+//			b=Integer.parseInt(JOptionPane.showInputDialog("Unesite broj između 1 i 10"));
+//			if(b>=1 && b<=10) {
+//				break;
+//			}
+//			
+//		}
+//		
+//		System.out.println(b);
 		
-		System.out.println(b);
+		boolean uvjet=false;
+		
+		do {
+			System.out.println("Osijek");
+		}while(uvjet);
+		
+		int i=0;
+		do {
+			System.out.println(i++);
+		}while(i<10);
+		
 		
 	}
 
