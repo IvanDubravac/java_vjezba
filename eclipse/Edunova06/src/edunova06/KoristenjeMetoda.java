@@ -17,9 +17,11 @@ public class KoristenjeMetoda {
 //
 //		System.out.println(E01_VrsteMetoda.m4_prim(20));
 		
+//		
+//				
+//	System.out.println(Z01.najveci(5, 7, 33));
 		
-				
-	System.out.println(Z01.najveci(5, 7, 33));
+		Z02.broj();
 			
 	}
 		
