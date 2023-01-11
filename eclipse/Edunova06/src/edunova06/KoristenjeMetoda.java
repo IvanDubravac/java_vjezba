@@ -21,8 +21,15 @@ public class KoristenjeMetoda {
 //				
 //	System.out.println(Z01.najveci(5, 7, 33));
 		
-		Z02.broj();
-			
+//		Z02.broj();
+		
+//		
+//		int broj=Z03.imePrezime("Marko", "Dubravac");
+//		System.out.println(broj);
+//			
+		
+		double r=Z05.decimalni(3.10, 2.3);
+		System.out.println(r);
 	}
 		
 		

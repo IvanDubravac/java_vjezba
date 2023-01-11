@@ -11,7 +11,6 @@ public class Z02 {
 			if (i >= 1 && i <= 10) {
 				return i;
 			}
-			System.out.println(i);
 		}
 		
 
