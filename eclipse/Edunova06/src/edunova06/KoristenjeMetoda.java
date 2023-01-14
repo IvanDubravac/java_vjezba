@@ -28,8 +28,7 @@ public class KoristenjeMetoda {
 //		System.out.println(broj);
 //			
 		
-		double r=Z05.decimalni(3.10, 2.3);
-		System.out.println(r);
+		System.out.println(Z05.decimalni(53.91, 3.35));
 	}
 		
 		
