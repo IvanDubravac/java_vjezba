@@ -32,7 +32,7 @@ public class Pomocno {
 				return i;
 			} else {
 				JOptionPane.showMessageDialog(null, "Broj mora biti veći od 0");
-
+				i = ucitajCijeliBroj(poruka);
 			}
 		}
 	}
@@ -44,11 +44,31 @@ public class Pomocno {
 				return i;
 			} else {
 				JOptionPane.showMessageDialog(null, "Broj mora biti veći od 0 i manji od 6");
-				i=ucitajCijeliBroj(poruka);
+				i = ucitajCijeliBroj(poruka);
 			}
 
 		}
 
 	}
+
+	public static String obavezanUnosStringa(String poruka) {
+		String s = "";
+		while (s.isEmpty()) {
+			s = JOptionPane.showInputDialog(poruka);
+			if (s.length() > 0) {
+				return s;
+			}
+		}
+
+		return "";
+	}
+
+	public static int slucajniBrojURasponu(int min, int max) {
+		return (int) ((Math.random() * (max - min)) + min);
+		
+	}
+	
+	
+	
 
 }
