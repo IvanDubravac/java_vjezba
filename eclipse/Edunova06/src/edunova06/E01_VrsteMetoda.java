@@ -33,3 +33,4 @@ public class E01_VrsteMetoda {
 		return true;
 	}
 }
+
