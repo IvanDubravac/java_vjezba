@@ -29,13 +29,27 @@ public class E02_Start {
 //		mjesto.setZupanija(zupanija);
 //		System.out.println(mjesto.getZupanija().getNaziv());
 		
+//		
+//		Grupa jp27=kreirajGrupu(1, "JP27", 20, new Date(), kreirajSmjer(1, "Java programiranje", 5999.99f, 500, true));
+//		Grupa pp26= kreirajGrupu(2, "PP26", 20, new Date(), kreirajSmjer(1, "PHP programiranje", 4999.99f, 500, false));
+//		
+//		System.out.println(jp27.getNaziv());
+//		System.out.println(pp26.getNaziv());
+//		System.out.println(jp27.getSmjer().getCijena()+pp26.getSmjer().getCijena());
 		
-		Grupa jp27=kreirajGrupu(1, "JP27", 20, new Date(), kreirajSmjer(1, "Java programiranje", 5999.99f, 500, true));
-		Grupa pp26= kreirajGrupu(2, "PP26", 20, new Date(), kreirajSmjer(1, "PHP programiranje", 4999.99f, 500, false));
+	
+		Racunalo r1=kreirajRacunalo("Dobro racunalo", 1999999.99, false, 200, 2.6f);
+		Racunalo r2=kreirajRacunalo("Loše racunalo", 2000, true, 50, 1.6f);
 		
-		System.out.println(jp27.getNaziv());
-		System.out.println(pp26.getNaziv());
-		System.out.println(jp27.getSmjer().getCijena()+pp26.getSmjer().getCijena());
+		System.out.println(r1.getCijena());
+		
+		Racunalo [] racunala=new Racunalo[2];
+		racunala[0]=r1;
+		racunala[1]=r2;
+		
+		System.out.println(racunala[0]);
+		
+		
 		
 		
 	}
@@ -73,6 +87,18 @@ public class E02_Start {
 		
 		return g;
 	
+	}
+	
+	private static Racunalo kreirajRacunalo(String ime, double cijena, boolean ukraden, int cijenaMisa, float herci) {
+		Racunalo r=new Racunalo();
+		r.setIme(ime);
+		r.setCijena(cijenaMisa);
+		r.setUkraden(ukraden);
+		r.setCijenaMisa(cijenaMisa);
+		r.setHerci(herci);
+		
+		return r;
+		
 	}
 	
 }
