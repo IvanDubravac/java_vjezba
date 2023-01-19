@@ -1,5 +1,7 @@
 package edunovaa07;
 
+import edunova08.Pomocno;
+
 public class Z02 {
 	public static void main(String[] args) {
 		String ime1=Pomocno.obavezanUnosStringa("Unesite svoje ime");

@@ -1,5 +1,7 @@
 package edunovaa07;
 
+import edunova08.Pomocno;
+
 public class E02_Program {
 
 	public static void main(String[] args) {
