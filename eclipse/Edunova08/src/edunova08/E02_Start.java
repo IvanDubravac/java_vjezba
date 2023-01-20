@@ -36,20 +36,25 @@ public class E02_Start {
 //		System.out.println(jp27.getNaziv());
 //		System.out.println(pp26.getNaziv());
 //		System.out.println(jp27.getSmjer().getCijena()+pp26.getSmjer().getCijena());
+//		
+//	
+//		Racunalo r1=kreirajRacunalo("Dobro racunalo", 1999999.99, false, 200, 2.6f);
+//		Racunalo r2=kreirajRacunalo("Loše racunalo", 2000, true, 50, 1.6f);
+//		
+//		System.out.println(r1.getCijena());
+//		
+//		Racunalo [] racunala=new Racunalo[2];
+//		racunala[0]=r1;
+//		racunala[1]=r2;
+//		
+//		System.out.println(racunala[0]);
 		
-	
-		Racunalo r1=kreirajRacunalo("Dobro racunalo", 1999999.99, false, 200, 2.6f);
-		Racunalo r2=kreirajRacunalo("Loše racunalo", 2000, true, 50, 1.6f);
+		Racun [] racuni=new Racun[3];
+		racuni[0]=kreirajRacun(new Date(), 250.4, kreirajKupca("Ivan Dubravac", "Braće Radicaća 35"));
+		racuni[1]=kreirajRacun(new Date(), 253230.4, kreirajKupca("Marko Dubravac", "Braće Radicaća 35"));
+		racuni[2]=kreirajRacun(new Date(), 1232130.42323, kreirajKupca("Marina Dubravac", "Braće Radicaća 35"));
 		
-		System.out.println(r1.getCijena());
-		
-		Racunalo [] racunala=new Racunalo[2];
-		racunala[0]=r1;
-		racunala[1]=r2;
-		
-		System.out.println(racunala[0]);
-		
-		
+		System.out.println(racuni[1].getKupac().getNaziv());
 		
 		
 	}
@@ -99,6 +104,22 @@ public class E02_Start {
 		
 		return r;
 		
+	}
+	private static Kupac kreirajKupca(String naziv, String adresa) {
+		Kupac k=new Kupac();
+		k.setNaziv(naziv);
+		k.setAdresa(adresa);
+		
+		return k;
+	}
+	private static Racun kreirajRacun(Date datum, double iznos, Kupac kupac) {
+		Racun r=new Racun();
+		r.setDatum(datum);
+		r.setIznos(iznos);
+		r.setKupac(kupac);
+		
+		
+		return r;
 	}
 	
 }
