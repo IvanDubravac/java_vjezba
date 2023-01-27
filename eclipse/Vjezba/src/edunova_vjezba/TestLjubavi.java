@@ -10,7 +10,7 @@ public class TestLjubavi {
 
 		String ime1 = JOptionPane.showInputDialog("Unesite prvo ime");
 		String ime2 = JOptionPane.showInputDialog("Unesite drugo ime");
-			System.out.println(Arrays.toString(BrojacSlova(ime1, ime2)));
+
 	}
 
 	public static int[] BrojacSlova(String ime1, String ime2) {
@@ -19,16 +19,19 @@ public class TestLjubavi {
 		char slovaUPolju[] = (zbrojImena.toUpperCase().toCharArray());
 		int poljeBrojeva[] = new int[zbrojImena.length()];
 
-		for (int i = 0; i < (zbrojImena.length() ); i++) {
+		for (int i = 0; i < (zbrojImena.length()); i++) {
 			brojac = 0;
-			for (int j = 0; j < (zbrojImena.length() ); j++) {
+			for (int j = 0; j < (zbrojImena.length()); j++) {
 				if (slovaUPolju[i] == slovaUPolju[j]) {
 					brojac++;
 				}
 			}
 			poljeBrojeva[i] = brojac;
 		}
-		return poljeBrojeva;
+
 	}
+
+	
+	
 	
 }
