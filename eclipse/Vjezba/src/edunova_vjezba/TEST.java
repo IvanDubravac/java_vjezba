@@ -24,9 +24,33 @@ public class TEST {
 			}
 			poljeBrojeva[i] = brojac;
 		}
+		int veci = 0, manji = 0;
+		if (ime1.length() > ime2.length()) {
+			veci = ime1.length();
+			manji = ime2.length();
+		} else {
+			manji = ime1.length();
+			veci = ime2.length();
+		}
 
+		int meduPolje[] = new int[veci];
+		if (veci > manji) {
+			for (int i = 0; i < manji; i++) {
+				meduPolje[i] = poljeBrojeva[i] + poljeBrojeva[poljeBrojeva.length - i - 1];
+			}
+			for (int i = 0; i < (veci- manji); i++) {
+				meduPolje[manji + i] = poljeBrojeva[manji + i];
+			}
+		} else {
+			for (int i = 0; i < manji; i++) {
+				meduPolje[i] = poljeBrojeva[i] + poljeBrojeva[poljeBrojeva.length - i - 1];
+			}
+			for (int i = 0; i < (veci - manji); i++) {
+				meduPolje[manji + i] = poljeBrojeva[manji + i];
+			}
+		}
 		System.out.println(Arrays.toString(poljeBrojeva));
+		System.out.println(Arrays.toString(meduPolje));
 
 	}
-
 }

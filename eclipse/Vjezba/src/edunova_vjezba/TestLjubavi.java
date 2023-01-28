@@ -28,10 +28,22 @@ public class TestLjubavi {
 			}
 			poljeBrojeva[i] = brojac;
 		}
+		int meduPolje[] = new int[ime2.length()];
+		if (ime1.length() > ime2.length()) {
+			for (int i = 0; i < ime2.length(); i++) {
+				meduPolje[i] = poljeBrojeva[i] + poljeBrojeva[poljeBrojeva.length - i - 1];
+			}
+			for (int i = 0; i < ( ime1.length() - ime2.length()); i++) {
+				meduPolje[ime2.length() + i] = poljeBrojeva[ime2.length() + i];
+			}
+		} else {
+			for (int i = 0; i < ime1.length(); i++) {
+				meduPolje[i] = poljeBrojeva[i] + poljeBrojeva[poljeBrojeva.length - i - 1];
+			}
+			for (int i = 0; i < (ime2.length() - ime1.length()); i++) {
+				meduPolje[ime1.length() + i] = poljeBrojeva[ime1.length() + i];
+			}
+		}
 
 	}
-
-	
-	
-	
 }
