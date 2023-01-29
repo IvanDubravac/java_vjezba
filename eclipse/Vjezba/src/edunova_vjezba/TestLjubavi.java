@@ -1,5 +1,6 @@
 package edunova_vjezba;
 
+import java.awt.KeyEventPostProcessor;
 import java.util.Arrays;
 
 import javax.swing.JOptionPane;
@@ -10,7 +11,11 @@ public class TestLjubavi {
 
 		String ime1 = JOptionPane.showInputDialog("Unesite prvo ime");
 		String ime2 = JOptionPane.showInputDialog("Unesite drugo ime");
-
+		String broj = "";
+		for (int i : kalkulator(prviKorak(ime1, ime2))) {
+			broj += i;
+		}
+		System.out.println(ime1 + " i " + ime2 + " se vole " + broj + "%");
 	}
 
 	public static int[] prviKorak(String ime1, String ime2) {
@@ -57,24 +62,33 @@ public class TestLjubavi {
 		return meduPolje;
 	}
 
-	private static int [] kalkulator(int meduPolje[]) {
-		boolean test=false;
-		int []rjesenje=new int[2];
-		do {
-			int testPrvi = 0;
-			int [] polje = new int[meduPolje.length/2];
-			for(int i=0; i< (meduPolje.length)/2 ; i++) {
-				if(testPrvi==0) {
-					polje[i]=meduPolje[i]+meduPolje[meduPolje.length-1+i];
-					testPrvi++;
-				}else {
-					polje[i]=polje[i]+polje[polje.length-1+i];
+	private static int[] kalkulator(int meduPolje[]) {
+		if (meduPolje.length <= 2) {
+			return meduPolje;
+		} else {
+			if (meduPolje.length % 2 == 0) {
+				int postupak[] = new int[(meduPolje.length / 2)];
+				for (int i = 0; i < postupak.length; i++) {
+					postupak[i] = meduPolje[i] + meduPolje[(meduPolje.length - 1-i)];
 				}
-				
+				if (postupak.length > 2) {
+					return kalkulator(postupak);
+				} else {
+					return postupak;
+				}
+			} else {
+				int postupak[] = new int[(meduPolje.length / 2) + 1];
+				for (int i = 0; i < postupak.length; i++) {
+					postupak[i] = meduPolje[i] + meduPolje[meduPolje.length - i - 1];
+					postupak[postupak.length - 1] = meduPolje[meduPolje.length / 2];
+
+				}
+				if (postupak.length > 2) {
+					return kalkulator(postupak);
+				} else
+					return postupak;
 			}
-			
-		}while(test==false);
-		
-		return rjesenje;
+
+		}
 	}
 }
