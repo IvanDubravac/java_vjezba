@@ -15,7 +15,7 @@ public class TestLjubavi {
 		for (int i : kalkulator(prviKorak(ime1, ime2))) {
 			broj += i;
 		}
-		System.out.println(ime1 + " i " + ime2 + " se vole " + broj + "%");
+		System.out.println(ime1 + " i " + ime2 + " se vole " + broj + "%.");
 	}
 
 	public static int[] prviKorak(String ime1, String ime2) {
@@ -59,7 +59,7 @@ public class TestLjubavi {
 			}
 		}
 
-		return meduPolje;
+		return viseZnamenkasti(meduPolje);
 	}
 
 	private static int[] kalkulator(int meduPolje[]) {
@@ -69,12 +69,12 @@ public class TestLjubavi {
 			if (meduPolje.length % 2 == 0) {
 				int postupak[] = new int[(meduPolje.length / 2)];
 				for (int i = 0; i < postupak.length; i++) {
-					postupak[i] = meduPolje[i] + meduPolje[(meduPolje.length - 1-i)];
+					postupak[i] = meduPolje[i] + meduPolje[(meduPolje.length - 1 - i)];
 				}
 				if (postupak.length > 2) {
-					return kalkulator(postupak);
+					return kalkulator(viseZnamenkasti(postupak));
 				} else {
-					return postupak;
+					return kalkulator(viseZnamenkasti(postupak));
 				}
 			} else {
 				int postupak[] = new int[(meduPolje.length / 2) + 1];
@@ -84,11 +84,35 @@ public class TestLjubavi {
 
 				}
 				if (postupak.length > 2) {
-					return kalkulator(postupak);
+					return kalkulator(viseZnamenkasti(postupak));
 				} else
-					return postupak;
+					return kalkulator(viseZnamenkasti(postupak));
 			}
 
 		}
 	}
+
+	public static int[] viseZnamenkasti(int[] polje) {
+		int brojac = 0;
+		for (int i : polje) {
+			if (i >= 10) {
+				brojac++;
+			}
+		}
+		int[] polje1 = new int[polje.length + brojac];
+		int index = 0;
+		for (int i = 0; i < polje.length; i++) {
+
+			if (polje[i] < 10) {
+				polje1[index++] = polje[i];
+			} else {
+				polje1[index++] = (polje[i] / 10);
+				polje1[index++] = (polje[i] % 10);
+
+			}
+		}
+
+		return polje1;
+	}
+
 }
