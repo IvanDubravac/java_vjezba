@@ -9,7 +9,6 @@ public class TEST {
 
 		String ime1 = JOptionPane.showInputDialog("Unesite prvo ime");
 		String ime2 = JOptionPane.showInputDialog("Unesite drugo ime");
-
 		int brojac;
 		String zbrojImena = ime1 + ime2;
 		char slovaUPolju[] = (zbrojImena.toUpperCase().toCharArray());
@@ -38,7 +37,7 @@ public class TEST {
 			for (int i = 0; i < manji; i++) {
 				meduPolje[i] = poljeBrojeva[i] + poljeBrojeva[poljeBrojeva.length - i - 1];
 			}
-			for (int i = 0; i < (veci- manji); i++) {
+			for (int i = 0; i < (veci - manji); i++) {
 				meduPolje[manji + i] = poljeBrojeva[manji + i];
 			}
 		} else {
@@ -51,6 +50,8 @@ public class TEST {
 		}
 		System.out.println(Arrays.toString(poljeBrojeva));
 		System.out.println(Arrays.toString(meduPolje));
-
+	
+	
+		
 	}
 }
