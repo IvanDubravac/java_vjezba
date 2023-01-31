@@ -1,14 +1,18 @@
 package edunova;
 
 import java.util.Scanner;
+
+import edunova.obrada.Polaznici;
 import edunova.obrada.Smjerovi;
 
 public class Start {
 	private Smjerovi smjerovi;
+	private Polaznici polaznici;
 
 	public Start() {
 		Pomocno.ulaz = new Scanner(System.in);
 		smjerovi = new Smjerovi(this);
+		polaznici=new Polaznici(this);
 		pozdravnaPoruka();
 		glavniIzbornik();
 
@@ -31,6 +35,8 @@ public class Start {
 		case 1:
 			smjerovi.izbornik();
 			break;
+		case 3:
+			polaznici.izbornik();
 
 		case 5:
 			System.out.println("Doviđenja!");

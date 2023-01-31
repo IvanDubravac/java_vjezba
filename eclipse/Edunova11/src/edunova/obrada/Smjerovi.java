@@ -68,11 +68,11 @@ public class Smjerovi {
 
 	private void pregled() {
 		System.out.println("Smjerovi u aplikaciji: ");
-		for(Smjer s: smjerovi) {
+		for (Smjer s : smjerovi) {
 			System.out.println(s);
 		}
 		izbornik();
-		
+
 	}
 
 	private void unosNovog() {
