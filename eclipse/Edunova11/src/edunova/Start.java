@@ -1,17 +1,20 @@
 package edunova;
 
 import java.util.Scanner;
+import edunova.obrada.Smjerovi;
 
 public class Start {
+	private Smjerovi smjerovi;
 
 	public Start() {
 		Pomocno.ulaz = new Scanner(System.in);
+		smjerovi = new Smjerovi(this);
 		pozdravnaPoruka();
 		glavniIzbornik();
 
 	}
 
-	private void glavniIzbornik() {
+	public void glavniIzbornik() {
 		System.out.println();
 		System.out.println("Dostupne opcije: ");
 		System.out.println("1. Smjerovi");
@@ -24,13 +27,14 @@ public class Start {
 	}
 
 	private void odabirGlavnogIzbornika() {
-		switch (Pomocno.unosBrojRaspon("Unesite broj", 1, 5)) {
+		switch (Pomocno.unosBrojRaspon("Unesite broj: ", 1, 5)) {
 		case 1:
 			smjerovi.izbornik();
 			break;
 
 		case 5:
 			System.out.println("Doviđenja!");
+
 		}
 
 	}

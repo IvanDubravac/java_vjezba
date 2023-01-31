@@ -19,6 +19,10 @@ public class Smjer extends Entitet {
 		this.certificiran = certificiran;
 	}
 
+	public Smjer() {
+		super();
+	}
+
 	public Smjer(int sifra) {
 		super(sifra);
 	}
@@ -63,4 +67,9 @@ public class Smjer extends Entitet {
 		this.certificiran = certificiran;
 	}
 
+	@Override
+	public String toString() {
+
+		return naziv;
+	}
 }
