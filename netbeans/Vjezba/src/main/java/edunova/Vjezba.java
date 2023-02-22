@@ -5,6 +5,7 @@
 package edunova;
 
 import edunova.util.HibernateUtil;
+import edunova.util.test;
 
 /**
  *
@@ -14,6 +15,6 @@ public class Vjezba {
 
     public static void main(String[] args) {
        
-        HibernateUtil.getSession();
+        test.izvedi();
     }
 }

@@ -4,20 +4,32 @@
  */
 package edunova.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.math.BigDecimal;
+import java.util.Date;
 
-
-@Entity
+@Entity(name="osobe")
 public class Osoba {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sifra;
+    @Column(
+            name = "imeosobe",
+            nullable = false, 
+            length = 50
+    )
     private String ime;
     private String prezime;
+    @Column(columnDefinition = "decimal(18,2)")
     private BigDecimal primanja;
     private Boolean aktivan;
+    @Column(columnDefinition = "datetime")
+    private Date datumRodenja;
 
     public Integer getSifra() {
         return sifra;
@@ -57,6 +69,14 @@ public class Osoba {
 
     public void setAktivan(Boolean aktivan) {
         this.aktivan = aktivan;
+    }
+
+    public Date getDatumRodenja() {
+        return datumRodenja;
+    }
+
+    public void setDatumRodenja(Date datumRodenja) {
+        this.datumRodenja = datumRodenja;
     }
     
     
