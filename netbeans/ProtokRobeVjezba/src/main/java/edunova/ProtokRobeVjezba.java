@@ -16,5 +16,6 @@ public class ProtokRobeVjezba {
     public static void main(String[] args) {
 //        HibernateUtil.getSession();
             unosZaposlenika.izvedi();
+            
     }
 }

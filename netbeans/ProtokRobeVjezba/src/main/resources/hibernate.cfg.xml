@@ -18,5 +18,6 @@
     
     
     <mapping class="edunova.model.Zaposlenik" />
+    <mapping class="edunova.model.Proizvod" />
   </session-factory>
 </hibernate-configuration>
