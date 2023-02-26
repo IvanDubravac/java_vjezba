@@ -20,8 +20,9 @@ public class unosZaposlenika {
     
      Zaposlenik z;
      
+     
      session.beginTransaction();
-     for(int i=0; i<333; i++){
+     for(int i=0; i<15; i++){
      z=new Zaposlenik();
      z.setIme(faker.name().firstName());
      z.setPrezime(faker.name().lastName());
