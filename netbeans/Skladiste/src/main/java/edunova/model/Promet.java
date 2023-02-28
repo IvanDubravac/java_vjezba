@@ -5,6 +5,7 @@
 package edunova.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 public class Promet extends Entitet {
     @ManyToOne
-    private List<Proizvod> proizvodi;
+    private Proizvod proizvod;
     private BigDecimal kolicina;
     private Date vrijeme;
     @ManyToOne
@@ -28,12 +29,11 @@ public class Promet extends Entitet {
     
     public Promet(){
     super();
-    proizvodi=new ArrayList<>();
     }
 
-    public Promet(List<Proizvod> proizvodi, BigDecimal kolicina, Date vrijeme, Zaposlenik zaposlenik, Vrsta vrsta, int sifra) {
+    public Promet(Proizvod proizvod, BigDecimal kolicina, Date vrijeme, Zaposlenik zaposlenik, Vrsta vrsta, int sifra) {
         super(sifra);
-        this.proizvodi = proizvodi;
+        this.proizvod = proizvod;
         this.kolicina = kolicina;
         this.vrijeme = vrijeme;
         this.zaposlenik = zaposlenik;
@@ -42,12 +42,12 @@ public class Promet extends Entitet {
     
     
 
-    public List<Proizvod> getProizvodi() {
-        return proizvodi;
+    public Proizvod getProizvod() {
+        return proizvod;
     }
 
-    public void setProizvodi(List<Proizvod> proizvodi) {
-        this.proizvodi = proizvodi;
+    public void setProizvod(Proizvod proizvod) {
+        this.proizvod = proizvod;
     }
 
     public BigDecimal getKolicina() {
@@ -81,6 +81,7 @@ public class Promet extends Entitet {
     public void setVrsta(Vrsta vrsta) {
         this.vrsta = vrsta;
     }
+    
     
     
     
