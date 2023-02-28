@@ -14,18 +14,17 @@ import jakarta.persistence.Id;
  * @author marko
  */
 @Entity
-public class Zaposlenik extends Entitet{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Zaposlenik extends Entitet {
+
     private String ime;
     private String prezime;
     private String oib;
     private String iban;
 
-    public Zaposlenik(){
-    super();
+    public Zaposlenik() {
+        super();
     }
-    
+
     public Zaposlenik(String ime, String prezime, String oib, String iban, int sifra) {
         super(sifra);
         this.ime = ime;
@@ -33,7 +32,6 @@ public class Zaposlenik extends Entitet{
         this.oib = oib;
         this.iban = iban;
     }
-
 
     public String getIme() {
         return ime;
@@ -66,8 +64,5 @@ public class Zaposlenik extends Entitet{
     public void setIban(String iban) {
         this.iban = iban;
     }
-    
-    
-   
-    
+
 }
