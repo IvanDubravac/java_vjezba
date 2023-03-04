@@ -23,8 +23,8 @@ import org.hibernate.Session;
 public class PocetniInsert {
 
     private static final int BROJ_ZAPOSLENIKA = 5;
-    private static final int BROJ_PROIZVODA = 5000;
-    private static final int BROJ_PROMETA = 10000;
+    private static final int BROJ_PROIZVODA = 500;
+    private static final int BROJ_PROMETA = 1000;
 
     private Session session;
     private Faker faker;
@@ -94,20 +94,17 @@ public class PocetniInsert {
 
     private void kreirajPromete() {
         Promet p;
-        List<Proizvod> pr;
         for (int i = 0; i < BROJ_PROMETA; i++) {
             p = new Promet();
             p.setVrijeme(faker.date().birthday(1, 5));
+            p.setVrsta(vrste.get(sb(0, vrste.size()-1)));
             p.setKolicina(new BigDecimal(faker.number().randomNumber()));
-            p.setZaposlenik(zaposlenici.get(sb(0, 1)));
-            pr = new ArrayList<>();
-            
-            
-            for (int j = 0; j < sb(5, 55); j++) {
-                pr.add(proizvodi.get(sb(0, BROJ_PROIZVODA-1)));
-            }
-            
+            p.setZaposlenik(zaposlenici.get(sb(0, zaposlenici.size()-1)));
+            p.setProizvod(proizvodi.get(sb(0, proizvodi.size()-1)));
             session.persist(p);
+            prometi.add(p);
+            
+         
         }
     }
 
