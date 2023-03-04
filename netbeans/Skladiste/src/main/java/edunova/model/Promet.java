@@ -18,8 +18,8 @@ import java.util.List;
  */
 @Entity
 public class Promet extends Entitet {
-    @ManyToMany
-    private List<Proizvod> proizvodi;
+    @ManyToOne
+    private Proizvod proizvod;
     private BigDecimal kolicina;
     private Date vrijeme;
     @ManyToOne
@@ -33,20 +33,22 @@ public class Promet extends Entitet {
 
     public Promet(Proizvod proizvod, BigDecimal kolicina, Date vrijeme, Zaposlenik zaposlenik, Vrsta vrsta, int sifra) {
         super(sifra);
-        this.proizvodi = proizvodi;
+        this.proizvod = proizvod;
         this.kolicina = kolicina;
         this.vrijeme = vrijeme;
         this.zaposlenik = zaposlenik;
         this.vrsta = vrsta;
     }
 
-    public List<Proizvod> getProizvodi() {
-        return proizvodi;
+    public Proizvod getProizvod() {
+        return proizvod;
     }
 
-    public void setProizvodi(List<Proizvod> proizvodi) {
-        this.proizvodi = proizvodi;
+    public void setProizvod(Proizvod proizvod) {
+        this.proizvod = proizvod;
     }
+
+   
     
     
 

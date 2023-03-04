@@ -24,14 +24,13 @@ public class PocetniInsert {
 
     private static final int BROJ_ZAPOSLENIKA = 5;
     private static final int BROJ_PROIZVODA = 5000;
-    private static final int BROJ_VRSTA = 2;
     private static final int BROJ_PROMETA = 10000;
 
     private Session session;
     private Faker faker;
     private List<Zaposlenik> zaposlenici;
     private List<Proizvod> proizvodi;
-    private Vrsta v[] = new Vrsta[BROJ_VRSTA];
+    private List<Vrsta> vrste;
     private List<Promet> prometi;
 
     public PocetniInsert() {
@@ -39,11 +38,12 @@ public class PocetniInsert {
         zaposlenici = new ArrayList<>();
         proizvodi = new ArrayList<>();
         prometi = new ArrayList<>();
+        vrste=new ArrayList<>();
         session = HibernateUtil.getSession();
         session.beginTransaction();
         kreirajZaposlenike();
         kreirajProizode();
-//        kreirajVrste();
+        kreirajVrste();
         kreirajPromete();
         session.getTransaction().commit();
 
@@ -76,12 +76,21 @@ public class PocetniInsert {
         }
     }
 
-//    private void kreirajVrste() {
-//        v[0] = new Vrsta("Doprema", 1, 1);
-//        v[1] = new Vrsta("Odprema", (-1), 2);
-//        session.persist(v);
-//
-//    }
+    private void kreirajVrste() {
+        Vrsta v1 ,v2;
+        v1=new Vrsta();
+        v2=new Vrsta();
+        v1.setNaziv("Doprema");
+        v1.setPredznak(1);
+        v2.setNaziv("Odprema");
+        v2.setPredznak((-1));
+        session.persist(v1);
+        session.persist(v2);
+        vrste.add(v1);
+        vrste.add(v2);
+        
+
+    }
 
     private void kreirajPromete() {
         Promet p;
@@ -97,7 +106,7 @@ public class PocetniInsert {
             for (int j = 0; j < sb(5, 55); j++) {
                 pr.add(proizvodi.get(sb(0, BROJ_PROIZVODA-1)));
             }
-            p.setProizvodi(pr);
+            
             session.persist(p);
         }
     }
