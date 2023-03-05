@@ -10,10 +10,7 @@ import edunova.util.SkladisteException;
 import java.util.List;
 import org.hibernate.Session;
 
-/**
- *
- * @author marko
- */
+
 public abstract class Obrada<T extends Entitet> {
 
     protected T entitet;
