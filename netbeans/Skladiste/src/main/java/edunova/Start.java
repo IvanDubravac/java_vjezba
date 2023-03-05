@@ -4,6 +4,8 @@
 
 package edunova;
 
+import edunova.controller.ObradaProizvoda;
+import edunova.model.Proizvod;
 import edunova.util.HibernateUtil;
 import edunova.util.PocetniInsert;
 
@@ -14,6 +16,9 @@ import edunova.util.PocetniInsert;
 public class Start {
 
     public static void main(String[] args) {
-        new PocetniInsert();
+        ObradaProizvoda op=new ObradaProizvoda();
+        for(Proizvod p: op.read()){
+            System.out.println(p.getNaziv());
+        }
     }
 }
