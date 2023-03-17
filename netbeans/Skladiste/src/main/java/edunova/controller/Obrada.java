@@ -5,12 +5,15 @@
 package edunova.controller;
 
 import edunova.model.Entitet;
-import edunova.util.HibernateUtil;
 import edunova.util.SkladisteException;
+import edunova.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 
-
+/**
+ *
+ * @author dell
+ */
 public abstract class Obrada<T extends Entitet> {
 
     protected T entitet;
@@ -18,7 +21,7 @@ public abstract class Obrada<T extends Entitet> {
 
     public abstract List<T> read();
 
-    protected abstract void kontrolaUnosa() throws SkladisteException;
+    protected abstract void kontrolaUnos() throws SkladisteException;
 
     protected abstract void kontrolaPromjena() throws SkladisteException;
 
@@ -29,10 +32,10 @@ public abstract class Obrada<T extends Entitet> {
     }
 
     public void create() throws SkladisteException {
-        if (entitet == null) {
+        if(entitet==null){
             throw new SkladisteException("Entitet je null");
         }
-        kontrolaUnosa();
+        kontrolaUnos();
         persist();
     }
 
@@ -61,4 +64,5 @@ public abstract class Obrada<T extends Entitet> {
     public void setEntitet(T entitet) {
         this.entitet = entitet;
     }
+
 }

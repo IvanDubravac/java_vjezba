@@ -4,10 +4,33 @@
  */
 package edunova.controller;
 
-/**
- *
- * @author marko
- */
-public class ObradaZaposlenika {
+import edunova.model.Zaposlenik;
+import edunova.util.Alati;
+import edunova.util.SkladisteException;
+
+
+public abstract class ObradaZaposlenika<T extends Zaposlenik> extends Obrada<T>{
+
     
+    @Override
+    protected void kontrolaUnos() throws SkladisteException{
+    kontrolaOib();
+    }
+    
+      @Override
+    protected void kontrolaPromjena() throws SkladisteException {
+    
+    }
+
+    @Override
+    protected void kontrolaBrisanje() throws SkladisteException{
+    
+    }
+
+    private void kontrolaOib() throws SkladisteException {
+        if(!Alati.kontrolaOIB(entitet.getOib())){
+            throw new SkladisteException("OIB nije u dobrom formatu");
+        }
+    }
+
 }
