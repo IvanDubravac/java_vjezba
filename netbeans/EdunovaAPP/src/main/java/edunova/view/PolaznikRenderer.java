@@ -18,6 +18,12 @@ import javax.swing.ListCellRenderer;
 // https://www.codejava.net/java-se/swing/jlist-custom-renderer-example
 public class PolaznikRenderer extends JLabel implements ListCellRenderer<Polaznik> {
 
+    public PolaznikRenderer() {
+        setOpaque(true);
+    }
+
+    
+    
     @Override
     public Component getListCellRendererComponent(
             JList<? extends Polaznik> list,
@@ -25,25 +31,24 @@ public class PolaznikRenderer extends JLabel implements ListCellRenderer<Polazni
             int index,
             boolean isSelected,
             boolean cellHasFocus) {
-
+        
+   
         setText(polaznik.getIme() + " " + polaznik.getPrezime());
 
-        setOpaque(true);
-        
         boolean neMozeBrisati=polaznik.getGrupe()!=null && !polaznik.getGrupe().isEmpty();
         
         if (isSelected) {
-            setBackground(Color.WHITE);
+            setBackground(Color.BLUE);
             if(neMozeBrisati){
-                setForeground(Color.MAGENTA);
+                setForeground(Color.GRAY);
             }else{
-                setForeground(Color.BLUE);
+                setForeground(Color.WHITE);
             }
             
         } else {
             setBackground(Color.WHITE);
             if(neMozeBrisati){
-                setForeground(Color.RED);
+                setForeground(Color.GRAY);
             }else{
                 setForeground(Color.BLACK);
             }

@@ -20,7 +20,9 @@ import javax.swing.JOptionPane;
  *
  * @author dell
  */
-public class ProzorSmjer extends javax.swing.JFrame {
+public class ProzorSmjer 
+        extends javax.swing.JFrame
+        implements EdunovaViewSucelje{
 
     private ObradaSmjer obrada;
     private DecimalFormat df;
@@ -42,7 +44,8 @@ public class ProzorSmjer extends javax.swing.JFrame {
         ucitaj();
     }
     
-    private void ucitaj(){
+    @Override
+    public void ucitaj(){
         DefaultListModel<Smjer> m = 
                 new DefaultListModel<>();
         m.addAll(obrada.read());
@@ -286,7 +289,7 @@ public class ProzorSmjer extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnObrisiActionPerformed
 
-    private void napuniView(){
+    public void napuniView(){
         var s = obrada.getEntitet();
         txtNaziv.setText(s.getNaziv());
         
@@ -331,7 +334,7 @@ public class ProzorSmjer extends javax.swing.JFrame {
         
     }
     
-    private void napuniModel(){
+    public void napuniModel(){
         var s = obrada.getEntitet();
         s.setNaziv(txtNaziv.getText());
         try {

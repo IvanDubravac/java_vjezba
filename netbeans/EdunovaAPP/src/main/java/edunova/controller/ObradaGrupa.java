@@ -5,6 +5,7 @@
 package edunova.controller;
 
 import edunova.model.Grupa;
+import edunova.model.Smjer;
 import edunova.util.EdunovaException;
 import java.util.List;
 
@@ -19,10 +20,24 @@ public class ObradaGrupa extends Obrada<Grupa>{
         return session.createQuery("from Grupa", 
                 Grupa.class).list();
     }
+    
+    public List<Grupa> read(Smjer s) {
+        return session.createQuery("from Grupa "
+                + " where smjer=:smjer "
+                + " order by datumPocetka desc", 
+                Grupa.class)
+                .setParameter("smjer", s)
+                .list();
+    }
 
     @Override
     protected void kontrolaUnos() throws EdunovaException {
-        
+        if(entitet.getSmjer().getSifra()==0){
+            throw new EdunovaException("Obavezno odabir smjera");
+        }
+        if(entitet.getPredavac().getSifra()==0){
+            entitet.setPredavac(null);
+        }
     }
 
     @Override

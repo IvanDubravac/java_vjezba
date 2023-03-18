@@ -4,9 +4,6 @@
 
 package edunova;
 
-
-import edunova.model.Proizvod;
-import edunova.util.HibernateUtil;
 import edunova.util.PocetniInsert;
 
 /**
@@ -16,8 +13,8 @@ import edunova.util.PocetniInsert;
 public class Start {
 
     public static void main(String[] args) {
-        new PocetniInsert();
-    }
         
-    
+        new PocetniInsert();
+        
+    }
 }
