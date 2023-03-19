@@ -4,6 +4,11 @@
  */
 package edunova.view;
 
+import edunova.controller.ObradaOperater;
+import edunova.util.HibernateUtil;
+import javax.swing.JOptionPane;
+import org.hibernate.Session;
+
 /**
  *
  * @author marko
@@ -15,6 +20,7 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     public SplashScreen() {
         initComponents();
+        ucitaj();
     }
 
     /**
@@ -30,7 +36,6 @@ public class SplashScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        setType(java.awt.Window.Type.POPUP);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/skladiste.jpg"))); // NOI18N
 
@@ -53,7 +58,32 @@ public class SplashScreen extends javax.swing.JFrame {
      * @param args the command line arguments
      */
   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private void ucitaj() {
+        new Ucitanje().start();
+    }
+    
+    private class Ucitanje extends Thread{
+
+        @Override
+        public void run() {
+            Session s= HibernateUtil.getSession();
+            
+            if(!s.getMetamodel().getEntities().isEmpty()){
+                ObradaOperater op=new ObradaOperater();
+                if(op.read().isEmpty()){
+                op.unosAdminOperatera();
+                }
+                new ProzorLogin().setVisible(true);
+            dispose();
+            }else{
+                JOptionPane.showMessageDialog(getRootPane(), "Problem sa bazom podataka!");
+            }
+        }
+        
+    }
 }

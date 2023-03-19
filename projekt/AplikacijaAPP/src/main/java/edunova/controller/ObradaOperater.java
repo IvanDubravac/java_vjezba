@@ -24,7 +24,7 @@ public class ObradaOperater extends ObradaOsoba<Operater>{
     }
     
     
-    public void unosAdminOperatera() {
+    public void unosAdminOperatera(){
         Operater o = new Operater();
         o.setIme("Admin");
         o.setPrezime("Operater");
