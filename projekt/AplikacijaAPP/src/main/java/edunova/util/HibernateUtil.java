@@ -27,9 +27,7 @@ public class HibernateUtil {
     public static Session getSession(){
         if(session==null){
             //konstruirati ga
-            session = new Configuration().configure("/java_vjezba/netbeans/SkladisteAPP/src/resources/hibernate.cfg.xml").buildSessionFactory().openSession();
-            
-            
+            session = new Configuration().configure().buildSessionFactory().openSession();
         }
         return session;
     }
