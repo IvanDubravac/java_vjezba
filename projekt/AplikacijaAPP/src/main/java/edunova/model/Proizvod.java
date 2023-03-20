@@ -74,4 +74,11 @@ public class Proizvod extends Entitet {
         this.netoKolicina = netoKolicina;
     }
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
+    
+
 }

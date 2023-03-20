@@ -4,7 +4,18 @@
  */
 package edunova.view;
 
+import edunova.controller.ObradaProizvod;
 import edunova.model.Proizvod;
+import edunova.util.Aplikacija;
+import edunova.util.EdunovaException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +23,30 @@ import edunova.model.Proizvod;
  */
 public class ProzorProizvod extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ProzorProizvod
-     */
+    private ObradaProizvod obrada;
+    private DecimalFormat df;
+    
     public ProzorProizvod() {
         initComponents();
+        obrada=new ObradaProizvod();
+        DecimalFormatSymbols dfs= new DecimalFormatSymbols(new Locale("hr","HR"));
+        df=new DecimalFormat("###,##0.00", dfs);
+        setTitle(Aplikacija.NAZIV_APP+": "+
+                Aplikacija.OPERATER.getImePrezime()+
+                ": "+ "Proizvodi"
+                );
+        ucitaj();
         
+        
+    }
+        
+        private void ucitaj(){
+            DefaultListModel<Proizvod> m=new DefaultListModel<>();
+            m.addAll(obrada.read());
+            lstPodaci.setModel(m);
+            lstPodaci.repaint();
+            
+       
     }
 
     /**
@@ -31,23 +60,76 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        txtNaziv = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtCijena = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtNetoKoličina = new javax.swing.JTextField();
+        btnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(lstPodaci);
+
+        jLabel1.setText("Naziv");
+
+        jLabel2.setText("Cijena");
+
+        jLabel4.setText("Neto količina");
+
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 218, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNetoKoličina, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(btnDodaj))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNetoKoličina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(btnDodaj))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 22, Short.MAX_VALUE))
         );
 
@@ -55,13 +137,49 @@ public class ProzorProizvod extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+       obrada.setEntitet(new Proizvod());
+       napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
     /**
      * @param args the command line arguments
      */
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Proizvod> lstPodaci;
+    private javax.swing.JTextField txtCijena;
+    private javax.swing.JTextField txtNaziv;
+    private javax.swing.JTextField txtNetoKoličina;
     // End of variables declaration//GEN-END:variables
+
+    private void napuniModel() {
+      var s=obrada.getEntitet();
+      s.setNaziv(txtNaziv.getText());
+        try {
+          s.setCijena(BigDecimal.valueOf(df.parse(txtCijena.getText()).doubleValue()));
+        } catch (Exception e) {
+            s.setCijena(BigDecimal.ZERO);
+        }
+        
+         try {
+          s.setNetoKolicina(BigDecimal.valueOf(df.parse(txtNetoKoličina.getText()).doubleValue()));
+        } catch (Exception e) {
+            s.setNetoKolicina(BigDecimal.ZERO);
+        }
+        
+        
+    }
 }
