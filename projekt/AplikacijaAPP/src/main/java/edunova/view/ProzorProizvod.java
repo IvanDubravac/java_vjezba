@@ -67,9 +67,17 @@ public class ProzorProizvod extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtNetoKoličina = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstPodaci);
 
         jLabel1.setText("Naziv");
@@ -85,37 +93,49 @@ public class ProzorProizvod extends javax.swing.JFrame {
             }
         });
 
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+
+        btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNetoKoličina, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(btnDodaj))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCijena, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNetoKoličina, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnObrisi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnPromjeni))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,10 +147,16 @@ public class ProzorProizvod extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNetoKoličina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(btnDodaj))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 22, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDodaj)
+                            .addComponent(btnPromjeni))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnObrisi))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,6 +174,50 @@ public class ProzorProizvod extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+       if(evt.getValueIsAdjusting()){
+       return;
+       }
+       if(lstPodaci.getSelectedValue()==null){
+       return;
+       }
+       obrada.setEntitet(lstPodaci.getSelectedValue());
+       
+       napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+        JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite proizvod!");
+           return; 
+        }
+        napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (EdunovaException ex) {
+           JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+       if(lstPodaci.getSelectedValue()==null){
+           JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite proizvod!");
+           return; 
+       }
+       if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati "+ obrada.getEntitet().getNaziv()+"?","Brisanje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+       return;
+       }
+       
+        try {
+            obrada.delete();
+            ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+       
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -155,6 +225,8 @@ public class ProzorProizvod extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -181,5 +253,13 @@ public class ProzorProizvod extends javax.swing.JFrame {
         }
         
         
+    }
+
+    private void napuniView() {
+      var s= obrada.getEntitet();
+      txtNaziv.setText(s.getNaziv());
+      txtCijena.setText(df.format(s.getCijena()));
+      txtNetoKoličina.setText(df.format(s.getNetoKolicina()));
+      
     }
 }
