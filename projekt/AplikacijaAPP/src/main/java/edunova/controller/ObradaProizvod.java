@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author dell
  */
-public class ObradaProizvod extends Obrada<Proizvod>{
+public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     public List<Proizvod> read() {
@@ -23,6 +23,13 @@ public class ObradaProizvod extends Obrada<Proizvod>{
                "from Proizvod order by naziv", 
                Proizvod.class)
                .list();
+    }
+    
+    public List<Proizvod> read(String uvjet) {
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+        return session.createQuery("from Proizvod where concat(naziv,' ',naziv) like :uvjet order by naziv ", Proizvod.class).
+                setParameter("uvjet", uvjet).setMaxResults(20).list();
     }
 
     @Override
@@ -42,13 +49,13 @@ public class ObradaProizvod extends Obrada<Proizvod>{
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
-       
+        
     }
     
     protected void kontrolaCijena() throws EdunovaException {
         if(entitet.getCijena()==null ||
                 entitet.getCijena().compareTo(BigDecimal.ZERO)<=0 ||
-                entitet.getCijena().compareTo(new BigDecimal(100000))==1){
+                entitet.getCijena().compareTo(new BigDecimal(1000000000))==1){
             throw new EdunovaException("Cijena mora biti postavljena, "
                     + "veća od 0 i manja od 10000");
         }
@@ -66,7 +73,7 @@ public class ObradaProizvod extends Obrada<Proizvod>{
         List<Proizvod> smjerovi=null;
         try {
             smjerovi = session.createQuery("from Proizvod p "
-                    + " where s.naziv=:naziv", 
+                    + " where p.naziv=:naziv", 
                     Proizvod.class)
                     .setParameter("naziv", entitet.getNaziv())
                     .list();

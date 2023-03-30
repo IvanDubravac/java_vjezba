@@ -55,6 +55,7 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik> {
     @Override
     protected void kontrolaUnos() throws EdunovaException {
         super.kontrolaUnos();
+        kontrolaIBAN();
 
     }
 
@@ -66,6 +67,26 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik> {
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
         super.kontrolaBrisanje();
+    }
+    
+    private void kontrolaIBAN() throws EdunovaException{
+        boolean provjera = false;
+        String iban = entitet.getIban();
+        if (iban.length() == 21) {
+            if (Character.compare(iban.charAt(0), 'H') == 0) {
+                if (Character.compare(iban.charAt(1), 'R') == 0) {
+
+                    for (int i = 2; i < iban.length(); i++) {
+                        if (Character.isDigit(iban.charAt(i))) {
+                            provjera = true;
+                        }
+                    }
+                }
+            }
+        }
+        if (!provjera) {
+            throw new EdunovaException("IBAN nije u dobrom formatu!");
+        }
     }
 
 }
