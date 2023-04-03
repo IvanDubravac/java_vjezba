@@ -4,27 +4,39 @@
  */
 package edunova.view;
 
-import edunova.controller.ObradaPromet;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import edunova.controller.ObradaProizvod;
 import edunova.model.Proizvod;
-import edunova.model.Promet;
-import edunova.model.Zaposlenik;
 import edunova.util.Aplikacija;
+import java.awt.event.KeyEvent;
+import java.util.Locale;
 import javax.swing.DefaultListModel;
 
 /**
  *
  * @author marko
  */
-public class ProzorPromet extends javax.swing.JFrame implements EdunovaViewSucelje{
-private ObradaPromet obrada;
-    
+public class ProzorPromet extends javax.swing.JFrame {
+
+    private ObradaProizvod op;
     public ProzorPromet() {
         initComponents();
-        obrada=new ObradaPromet();
-        setTitle(Aplikacija.NAZIV_APP+": "+
-                Aplikacija.OPERATER.getImePrezime()+
-                ": "+ "Promet"
-                );
+         setTitle(Aplikacija.NAZIV_APP + ": " + 
+                Aplikacija.OPERATER.getImePrezime() + 
+                ": Promet");
+        
+        op=new ObradaProizvod();
+        definirajDatum();
+        
+    }
+    
+       private void definirajDatum(){
+        DatePickerSettings dps = 
+                new DatePickerSettings(new Locale("hr","HR"));
+       dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+       dps.setTranslationClear("Očisti");
+       dps.setTranslationToday("Danas");
+       dpDatum.setSettings(dps);
     }
 
     /**
@@ -36,10 +48,14 @@ private ObradaPromet obrada;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
+        txtPretraga = new javax.swing.JTextField();
+        btnPretraga = new javax.swing.JButton();
+        dpDatum = new com.github.lgooddatepicker.components.DatePicker();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -49,50 +65,90 @@ private ObradaPromet obrada;
         });
         jScrollPane1.setViewportView(lstPodaci);
 
+        txtPretraga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPretragaActionPerformed(evt);
+            }
+        });
+        txtPretraga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPretragaKeyPressed(evt);
+            }
+        });
+
+        btnPretraga.setText("Traži");
+        btnPretraga.setActionCommand("Traži 🔍︎");
+        btnPretraga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPretragaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                .addGap(212, 212, 212))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPretraga))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
-       
+      
     }//GEN-LAST:event_lstPodaciValueChanged
 
-    @Override
-    public void ucitaj() {
-     
-    }
+    private void txtPretragaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPretragaKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            ucitajProizvode();
+        }
+    }//GEN-LAST:event_txtPretragaKeyPressed
 
-    @Override
-    public void napuniView() {
-      
-    }
+    private void btnPretragaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretragaActionPerformed
+        ucitajProizvode();
+    }//GEN-LAST:event_btnPretragaActionPerformed
 
-    @Override
-    public void napuniModel() {
-       
-    }
+    private void txtPretragaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPretragaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPretragaActionPerformed
 
-  
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPretraga;
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private com.github.lgooddatepicker.components.DatePicker dpDatum;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Proizvod> lstPodaci;
+    private javax.swing.JTextField txtPretraga;
     // End of variables declaration//GEN-END:variables
+
+    private void ucitajProizvode() {
+        DefaultListModel<Proizvod> p=new DefaultListModel<>();
+        p.addAll(op.read(txtPretraga.getText()));
+        lstPodaci.setModel(p);
+        lstPodaci.repaint();
+    }
 }

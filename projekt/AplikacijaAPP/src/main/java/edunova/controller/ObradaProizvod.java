@@ -49,6 +49,8 @@ public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
+  
+              
         
     }
     

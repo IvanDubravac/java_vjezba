@@ -233,9 +233,12 @@ public class ProzorProizvod extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite proizvod!");
            return; 
        }
+       
+       obrada.setEntitet(lstPodaci.getSelectedValue());
        if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati "+ obrada.getEntitet().getNaziv()+"?","Brisanje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
        return;
        }
+       
        
         try {
             obrada.delete();
