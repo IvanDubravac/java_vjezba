@@ -4,36 +4,38 @@
  */
 package edunova.controller;
 
-import edunova.model.Zaposlenik;
+import edunova.model.Operater;
 import edunova.util.EdunovaException;
+import jakarta.persistence.NoResultException;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
  * @author dell
  */
-public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik> {
+public class ObradaOperaterNovi extends ObradaOsoba<Operater> {
 
     @Override
-    public List<Zaposlenik> read() {
-        return session.createQuery("from Zaposlenik order by prezime, ime",
-                Zaposlenik.class).list();
+    public List<Operater> read() {
+        return session.createQuery("from Operater order by prezime, ime",
+                Operater.class).list();
     }
 
-    public List<Zaposlenik> read(String uvjet) {
+    public List<Operater> read(String uvjet) {
         uvjet = uvjet.trim();
         uvjet = "%" + uvjet + "%";
-        return session.createQuery("from Zaposlenik "
+        return session.createQuery("from Operater "
                 + " where concat(ime,' ',prezime,' ',ime) "
                 + " like :uvjet "
                 + " order by prezime, ime ",
-                Zaposlenik.class)
+                Operater.class)
                 .setParameter("uvjet", uvjet)
                 .setMaxResults(12)
                 .list();
     }
 
-    public List<Zaposlenik> read(String uvjet,
+    public List<Operater> read(String uvjet,
             boolean traziOdPocetkaImena) {
         uvjet = uvjet.trim();
         if (traziOdPocetkaImena) {
@@ -42,11 +44,11 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik> {
             uvjet = "%" + uvjet + "%";
         }
 
-        return session.createQuery("from Zaposlenik "
+        return session.createQuery("from Operater "
                 + " where concat(ime,' ',prezime,' ',ime) "
                 + " like :uvjet "
                 + " order by prezime, ime ",
-                Zaposlenik.class)
+                Operater.class)
                 .setParameter("uvjet", uvjet)
                 .setMaxResults(12)
                 .list();
@@ -87,6 +89,31 @@ public class ObradaZaposlenik extends ObradaOsoba<Zaposlenik> {
         if (!provjera) {
             throw new EdunovaException("IBAN nije u dobrom formatu!");
         }
+    }
+    
+    
+      public Operater autoriziraj(String email, char[] lozinka){
+        Operater o;
+        try {
+            o = session.createQuery(
+                    "from Operater o where o.email=:email", 
+                    Operater.class)
+                    .setParameter("email",email)
+                    .getSingleResult();
+            
+        } catch (NoResultException e) {
+            return null;
+        }
+        
+        if(BCrypt.checkpw(
+                new String(lozinka), 
+                new String(o.getLozinka())
+                            )
+                ){
+            return o;
+        }
+        
+        return null;
     }
 
 }

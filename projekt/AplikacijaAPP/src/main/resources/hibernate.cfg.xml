@@ -22,7 +22,6 @@
     <mapping class="edunova.model.Proizvod" />
     <mapping class="edunova.model.Promet" />
     <mapping class="edunova.model.Vrsta" />
-    <mapping class="edunova.model.Zaposlenik" />
     <mapping class="edunova.model.Operater" />
     
     

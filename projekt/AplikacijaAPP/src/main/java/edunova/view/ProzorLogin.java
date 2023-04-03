@@ -4,7 +4,7 @@
  */
 package edunova.view;
 
-import edunova.controller.ObradaOperater;
+import edunova.controller.ObradaOperaterStari;
 import edunova.model.Operater;
 import edunova.util.Aplikacija;
 import java.awt.event.KeyEvent;
@@ -15,14 +15,14 @@ import java.awt.event.KeyEvent;
  */
 public class ProzorLogin extends javax.swing.JFrame {
 
-    private ObradaOperater obrada;
+    private ObradaOperaterStari obrada;
 
     /**
      * Creates new form ProzorLogin
      */
     public ProzorLogin() {
         initComponents();
-        obrada = new ObradaOperater();
+        obrada = new ObradaOperaterStari();
         setTitle(Aplikacija.NAZIV_APP + " Login");
     }
 
@@ -72,7 +72,7 @@ public class ProzorLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Email");
 
-        txtEmail.setText("ivandubravac99@gmail.com");
+        txtEmail.setText("njuzbasic@gmail.com");
         txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtEmailKeyPressed(evt);

@@ -5,9 +5,8 @@
 package edunova.view;
 
 import edunova.controller.ObradaVrsta;
-import edunova.controller.ObradaZaposlenik;
+import edunova.controller.ObradaOperaterNovi;
 import edunova.model.Vrsta;
-import edunova.model.Zaposlenik;
 import edunova.util.EdunovaException;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;

@@ -4,7 +4,7 @@
  */
 package edunova.view;
 
-import edunova.controller.ObradaOperater;
+import edunova.controller.ObradaOperaterStari;
 import edunova.util.HibernateUtil;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -74,7 +74,7 @@ public class SplashScreen extends javax.swing.JFrame {
             Session s= HibernateUtil.getSession();
             
             if(!s.getMetamodel().getEntities().isEmpty()){
-                ObradaOperater op=new ObradaOperater();
+                ObradaOperaterStari op=new ObradaOperaterStari();
                 if(op.read().isEmpty()){
                 op.unosAdminOperatera();
                 }

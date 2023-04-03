@@ -4,9 +4,9 @@
  */
 package edunova.view;
 
-import edunova.controller.ObradaZaposlenik;
+import edunova.controller.ObradaOperaterNovi;
+import edunova.model.Operater;
 import edunova.model.Proizvod;
-import edunova.model.Zaposlenik;
 import edunova.util.Alati;
 import edunova.util.Aplikacija;
 import edunova.util.EdunovaException;
@@ -22,22 +22,22 @@ import javax.swing.JOptionPane;
  *
  * @author marko
  */
-public class ProzorZaposlenici extends javax.swing.JFrame {
+public class ProzorOperateri extends javax.swing.JFrame {
 
-    private ObradaZaposlenik obrada;
+    private ObradaOperaterNovi obrada;
     private DecimalFormat df;
     
     
     
-    public ProzorZaposlenici() {
+    public ProzorOperateri() {
        
         initComponents();
-        obrada=new ObradaZaposlenik();
+        obrada=new ObradaOperaterNovi();
         DecimalFormatSymbols dfs= new DecimalFormatSymbols(new Locale("hr","HR"));
         df=new DecimalFormat("###,##0.00", dfs);
         setTitle(Aplikacija.NAZIV_APP+": "+
                 Aplikacija.OPERATER.getImePrezime()+
-                ": "+ "Zaposlenici"
+                ": "+ "Operateri"
                 );
        
         
@@ -45,7 +45,7 @@ public class ProzorZaposlenici extends javax.swing.JFrame {
     }
         
         private void ucitaj(){
-            DefaultListModel<Zaposlenik> m=new DefaultListModel<>();
+            DefaultListModel<Operater> m=new DefaultListModel<>();
             m.addAll(obrada.read(txtPretraga.getText()));
             lstZaposlenici.setModel(m);
             lstZaposlenici.repaint();
@@ -251,7 +251,7 @@ public class ProzorZaposlenici extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        obrada.setEntitet(new Zaposlenik());
+        obrada.setEntitet(new Operater());
         napuniModel();
         try {
             obrada.create();
@@ -345,7 +345,7 @@ public class ProzorZaposlenici extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Zaposlenik> lstZaposlenici;
+    private javax.swing.JList<Operater> lstZaposlenici;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIban;
     private javax.swing.JTextField txtIme;

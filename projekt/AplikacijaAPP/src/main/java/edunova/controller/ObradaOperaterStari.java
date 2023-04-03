@@ -16,7 +16,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author dell
  */
-public class ObradaOperater extends ObradaOsoba<Operater>{
+public class ObradaOperaterStari extends ObradaOsoba<Operater>{
 
     @Override
     public List<Operater> read() {

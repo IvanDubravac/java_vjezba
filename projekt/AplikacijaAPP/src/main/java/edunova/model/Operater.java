@@ -16,6 +16,25 @@ public class Operater extends Osoba{
     
     @Column(columnDefinition = "char(61)")
     private char[] lozinka;
+    private String iban;
+
+    public Operater() {
+    super();
+    }
+
+    public Operater(char[] lozinka, String iban) {
+        this.lozinka = lozinka;
+        this.iban = iban;
+    }
+
+    public Operater(char[] lozinka, String iban, int sifra, String ime, String prezime, String oib, String email) {
+        super(sifra, ime, prezime, oib, email);
+        this.lozinka = lozinka;
+        this.iban = iban;
+    }
+    
+
+    
 
     public char[] getLozinka() {
         return lozinka;
@@ -24,6 +43,17 @@ public class Operater extends Osoba{
     public void setLozinka(char[] lozinka) {
         this.lozinka = lozinka;
     }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+
+    
     public String getImePrezime(){
     return getIme()+" "+ getPrezime();
     }

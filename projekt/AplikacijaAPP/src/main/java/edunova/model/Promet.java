@@ -23,22 +23,34 @@ public class Promet extends Entitet {
     private BigDecimal kolicina;
     private Date vrijeme;
     @ManyToOne
-    private Zaposlenik zaposlenik;
+    private Operater operater;
     @ManyToOne
     private Vrsta vrsta;
-    
-    public Promet(){
+
+    public Promet() {
     super();
     }
 
-    public Promet(Proizvod proizvod, BigDecimal kolicina, Date vrijeme, Zaposlenik zaposlenik, Vrsta vrsta, int sifra) {
+    public Promet(Proizvod proizvod, BigDecimal kolicina, Date vrijeme, Operater operater, Vrsta vrsta) {
+        this.proizvod = proizvod;
+        this.kolicina = kolicina;
+        this.vrijeme = vrijeme;
+        this.operater = operater;
+        this.vrsta = vrsta;
+    }
+
+    public Promet(Proizvod proizvod, BigDecimal kolicina, Date vrijeme, Operater operater, Vrsta vrsta, int sifra) {
         super(sifra);
         this.proizvod = proizvod;
         this.kolicina = kolicina;
         this.vrijeme = vrijeme;
-        this.zaposlenik = zaposlenik;
+        this.operater = operater;
         this.vrsta = vrsta;
     }
+    
+    
+    
+    
 
     public Proizvod getProizvod() {
         return proizvod;
@@ -47,12 +59,6 @@ public class Promet extends Entitet {
     public void setProizvod(Proizvod proizvod) {
         this.proizvod = proizvod;
     }
-
-   
-    
-    
-
- 
 
     public BigDecimal getKolicina() {
         return kolicina;
@@ -70,12 +76,12 @@ public class Promet extends Entitet {
         this.vrijeme = vrijeme;
     }
 
-    public Zaposlenik getZaposlenik() {
-        return zaposlenik;
+    public Operater getOperater() {
+        return operater;
     }
 
-    public void setZaposlenik(Zaposlenik zaposlenik) {
-        this.zaposlenik = zaposlenik;
+    public void setOperater(Operater operater) {
+        this.operater = operater;
     }
 
     public Vrsta getVrsta() {
@@ -86,6 +92,7 @@ public class Promet extends Entitet {
         this.vrsta = vrsta;
     }
     
+  
     
     
     
