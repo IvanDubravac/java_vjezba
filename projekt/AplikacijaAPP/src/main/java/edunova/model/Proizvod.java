@@ -5,8 +5,10 @@
 package edunova.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,6 +22,8 @@ public class Proizvod extends Entitet {
     private Date rokTrajanja;
     private String zemljaPodrijetla;
     private BigDecimal netoKolicina;
+      @OneToMany(mappedBy = "proizvod")
+    private List<Promet> prometi;
 
     public Proizvod() {
         super();
@@ -78,6 +82,16 @@ public class Proizvod extends Entitet {
     public String toString() {
         return naziv;
     }
+
+    public List<Promet> getPrometi() {
+        return prometi;
+    }
+
+    public void setPrometi(List<Promet> prometi) {
+        this.prometi = prometi;
+    }
+    
+    
     
     
 

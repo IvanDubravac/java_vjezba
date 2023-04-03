@@ -5,6 +5,7 @@
 package edunova.controller;
 
 import edunova.model.Operater;
+import edunova.model.Promet;
 import edunova.util.EdunovaException;
 import jakarta.persistence.NoResultException;
 import java.util.List;
@@ -69,6 +70,27 @@ public class ObradaOperaterNovi extends ObradaOsoba<Operater> {
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
         super.kontrolaBrisanje();
+        
+         if(entitet.getPrometi()!=null &&
+                !entitet.getPrometi().isEmpty()){
+            
+          StringBuilder sb = new StringBuilder();
+            sb.append("Operater ");
+            sb.append(entitet.getImePrezime());
+            sb.append(" se ne može obrisati jer sudjeluje u transakcijama:");
+            sb.append("\n");
+            int b=0;
+            for(Promet p : entitet.getPrometi()){
+                sb.append(++b);
+                sb.append(". ");
+                sb.append(p.getSifra());
+                sb.append("\n");
+            }
+            sb.append("--------");
+            
+            throw new EdunovaException(sb.toString());  
+        }
+        
     }
     
     private void kontrolaIBAN() throws EdunovaException{

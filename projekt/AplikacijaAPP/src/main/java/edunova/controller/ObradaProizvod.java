@@ -6,6 +6,7 @@ package edunova.controller;
 
 
 import edunova.model.Proizvod;
+import edunova.model.Promet;
 import edunova.util.EdunovaException;
 import java.math.BigDecimal;
 import java.util.List;
@@ -49,7 +50,26 @@ public class ObradaProizvod extends Obrada<Proizvod> {
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
-  
+            
+        if(entitet.getPrometi()!=null &&
+                !entitet.getPrometi().isEmpty()){
+            
+          StringBuilder sb = new StringBuilder();
+            sb.append("Proizvod ");
+            sb.append(entitet.getNaziv());
+            sb.append(" se ne može obrisati jer se nalazi u prometu:");
+            sb.append("\n");
+            int b=0;
+            for(Promet p : entitet.getPrometi()){
+                sb.append(++b);
+                sb.append(". ");
+                sb.append(p.getSifra());
+                sb.append("\n");
+            }
+            sb.append("--------");
+            
+            throw new EdunovaException(sb.toString());  
+        }
               
         
     }

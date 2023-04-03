@@ -6,6 +6,8 @@ package edunova.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 /**
  *
@@ -17,6 +19,8 @@ public class Operater extends Osoba{
     @Column(columnDefinition = "char(61)")
     private char[] lozinka;
     private String iban;
+     @OneToMany(mappedBy = "operater")
+    private List<Promet> prometi;
 
     public Operater() {
     super();
@@ -57,5 +61,15 @@ public class Operater extends Osoba{
     public String getImePrezime(){
     return getIme()+" "+ getPrezime();
     }
+
+    public List<Promet> getPrometi() {
+        return prometi;
+    }
+
+    public void setPrometi(List<Promet> prometi) {
+        this.prometi = prometi;
+    }
+    
+    
     
 }
