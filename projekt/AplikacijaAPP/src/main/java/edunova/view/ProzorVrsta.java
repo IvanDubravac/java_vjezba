@@ -7,6 +7,7 @@ package edunova.view;
 import edunova.controller.ObradaVrsta;
 import edunova.controller.ObradaOperaterNovi;
 import edunova.model.Vrsta;
+import edunova.util.Aplikacija;
 import edunova.util.EdunovaException;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -25,6 +26,10 @@ public class ProzorVrsta extends javax.swing.JFrame {
     public ProzorVrsta() {
         initComponents();
         obrada=new ObradaVrsta();
+          setTitle(Aplikacija.NAZIV_APP+": "+
+                Aplikacija.OPERATER.getImePrezime()+
+                ": "+ "Vrsta"
+                );
     }
     
      
@@ -94,24 +99,7 @@ public class ProzorVrsta extends javax.swing.JFrame {
         }
         
         
-        int predznak=0;
-        
-        if(((String)cmbPredznak.getSelectedItem()).equals("Ulaz u skladište")){
-            predznak=1;
-        }else{
-            predznak=-1;
-        }
-        
-        System.out.println("S ovim predznakom ideš u bazu: " + predznak);
-        
-           obrada.setEntitet(new Vrsta());
-        napuniModel();
-        try {
-            obrada.create();
-            
-        } catch (EdunovaException ex) {
-            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
-        }
+    
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -125,7 +113,13 @@ public class ProzorVrsta extends javax.swing.JFrame {
 private void napuniModel() {
       var s=obrada.getEntitet();
       s.setNaziv(txtVrsta.getText());
-      s.setPredznak(cmbPredznak.getSelectedIndex());
+      int predznak=0; 
+      if(((String)cmbPredznak.getSelectedItem()).equals("Ulaz u skladište")){
+            predznak=1;
+        }else{
+            predznak=-1;
+        }
+      s.setPredznak(predznak);
      
  
     }
