@@ -19,8 +19,6 @@ public class Proizvod extends Entitet {
 
     private String naziv;
     private BigDecimal cijena;
-    private Date rokTrajanja;
-    private String zemljaPodrijetla;
     private BigDecimal netoKolicina;
       @OneToMany(mappedBy = "proizvod")
     private List<Promet> prometi;
@@ -33,8 +31,7 @@ public class Proizvod extends Entitet {
         super(sifra);
         this.naziv = naziv;
         this.cijena = cijena;
-        this.rokTrajanja = rokTrajanja;
-        this.zemljaPodrijetla = zemljaPodrijetla;
+        
         this.netoKolicina = netoKolicina;
     }
 
@@ -54,21 +51,7 @@ public class Proizvod extends Entitet {
         this.cijena = cijena;
     }
 
-    public Date getRokTrajanja() {
-        return rokTrajanja;
-    }
-
-    public void setRokTrajanja(Date rokTrajanja) {
-        this.rokTrajanja = rokTrajanja;
-    }
-
-    public String getZemljaPodrijetla() {
-        return zemljaPodrijetla;
-    }
-
-    public void setZemljaPodrijetla(String zemljaPodrijetla) {
-        this.zemljaPodrijetla = zemljaPodrijetla;
-    }
+  
 
     public BigDecimal getNetoKolicina() {
         return netoKolicina;

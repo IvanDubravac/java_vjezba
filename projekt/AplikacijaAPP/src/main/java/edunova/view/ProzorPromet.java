@@ -4,21 +4,41 @@
  */
 package edunova.view;
 
+import com.github.javafaker.DateAndTime;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import edunova.controller.ObradaProizvod;
+import edunova.controller.ObradaPromet;
+import edunova.controller.ObradaVrsta;
 import edunova.model.Proizvod;
+import edunova.model.Promet;
+import edunova.model.Vrsta;
 import edunova.util.Aplikacija;
+import edunova.util.EdunovaException;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author marko
  */
 public class ProzorPromet extends javax.swing.JFrame {
-
+    
+    private ObradaPromet opr;
     private ObradaProizvod op;
+    private DecimalFormat df;
+    
     public ProzorPromet() {
         initComponents();
          setTitle(Aplikacija.NAZIV_APP + ": " + 
@@ -27,6 +47,10 @@ public class ProzorPromet extends javax.swing.JFrame {
         
         op=new ObradaProizvod();
         definirajDatum();
+        ucitajVrstu();
+        opr=new ObradaPromet();
+        DecimalFormatSymbols dfs=new DecimalFormatSymbols(new Locale("hr","HR"));
+        df=new DecimalFormat("###,##0.00",dfs);
         
     }
     
@@ -36,8 +60,21 @@ public class ProzorPromet extends javax.swing.JFrame {
        dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
        dps.setTranslationClear("Očisti");
        dps.setTranslationToday("Danas");
-       dpDatum.setSettings(dps);
+       
     }
+       
+       
+       
+       private void ucitajVrstu(){
+           DefaultComboBoxModel<Vrsta> v=new DefaultComboBoxModel<>();
+           Vrsta vr=new Vrsta();
+           vr.setSifra(0);
+           vr.setNaziv("Nije odabrano");
+           v.addElement(vr);
+           v.addAll(new ObradaVrsta().read());
+           cmbVrsta.setModel(v);
+           cmbVrsta.repaint();
+       }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,11 +86,20 @@ public class ProzorPromet extends javax.swing.JFrame {
     private void initComponents() {
 
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
         txtPretraga = new javax.swing.JTextField();
         btnPretraga = new javax.swing.JButton();
-        dpDatum = new com.github.lgooddatepicker.components.DatePicker();
+        cmbVrsta = new javax.swing.JComboBox<>();
+        txtKolicina = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        dtp = new com.github.lgooddatepicker.components.DateTimePicker();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnObradi = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +130,25 @@ public class ProzorPromet extends javax.swing.JFrame {
             }
         });
 
+        cmbVrsta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbVrstaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Datum i vrijeme");
+
+        jLabel3.setText("Količina");
+
+        jLabel4.setText("Vrsta");
+
+        btnObradi.setText("Obradi");
+        btnObradi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObradiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,26 +159,48 @@ public class ProzorPromet extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(txtPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(255, Short.MAX_VALUE))
+                    .addComponent(dtp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnObradi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPretraga))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dtp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnObradi))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPretraga))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
@@ -134,14 +221,39 @@ public class ProzorPromet extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPretragaActionPerformed
 
+    private void cmbVrstaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVrstaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbVrstaActionPerformed
+
+    private void btnObradiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObradiActionPerformed
+       
+        opr.setEntitet(new Promet());
+        napuniModel();
+        try {
+            opr.create();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getPoruka());
+        }
+              
+        
+        
+    }//GEN-LAST:event_btnObradiActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnObradi;
     private javax.swing.JButton btnPretraga;
+    private javax.swing.JComboBox<Vrsta> cmbVrsta;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
-    private com.github.lgooddatepicker.components.DatePicker dpDatum;
+    private com.github.lgooddatepicker.components.DateTimePicker dtp;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Proizvod> lstPodaci;
+    private javax.swing.JTextField txtKolicina;
     private javax.swing.JTextField txtPretraga;
     // End of variables declaration//GEN-END:variables
 
@@ -150,5 +262,25 @@ public class ProzorPromet extends javax.swing.JFrame {
         p.addAll(op.read(txtPretraga.getText()));
         lstPodaci.setModel(p);
         lstPodaci.repaint();
+    }
+    
+    public void napuniModel(){
+        var p=opr.getEntitet();
+        try {
+             p.setKolicina(BigDecimal.valueOf(df.parse(txtKolicina.getText()).doubleValue()));
+        } catch (Exception e) {
+            p.setKolicina(BigDecimal.ZERO);
+        }
+       
+        p.setOperater(Aplikacija.OPERATER);
+        p.setProizvod(lstPodaci.getSelectedValue());
+        p.setVrsta((Vrsta) cmbVrsta.getSelectedItem());
+        LocalDate ld=dtp.datePicker.getDate();
+        LocalTime lt=dtp.timePicker.getTime();
+        LocalDateTime fromDateAndTime= LocalDateTime.of(ld,lt);
+        Date datum=Date.from(fromDateAndTime.atZone(ZoneId.systemDefault()).toInstant());
+        p.setVrijeme(datum);
+        
+        
     }
 }

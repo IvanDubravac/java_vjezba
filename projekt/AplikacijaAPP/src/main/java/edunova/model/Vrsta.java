@@ -44,4 +44,11 @@ public class Vrsta extends Entitet {
         this.predznak = predznak;
     }
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
+    
+
 }

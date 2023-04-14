@@ -25,7 +25,7 @@ public class PocetniInsert {
 
     
     private static final int BROJ_PROIZVODA = 100;
-    private static final int BROJ_PROMETA = 500;
+    private static final int BROJ_PROMETA = 50;
 
     private Session session;
     private Faker faker;
@@ -97,8 +97,9 @@ public class PocetniInsert {
             p = new Proizvod();
             p.setNaziv(faker.commerce().productName());
             p.setCijena(new BigDecimal(faker.number().randomNumber()));
-            p.setZemljaPodrijetla(faker.country().name());
-            p.setNetoKolicina(new BigDecimal(faker.number().randomNumber()));
+            p.setNetoKolicina(new BigDecimal(faker.number().numberBetween(0, 1000)));
+            
+           
             session.persist(p);
             proizvodi.add(p);
         }
@@ -126,7 +127,7 @@ public class PocetniInsert {
             p = new Promet();
             p.setVrijeme(faker.date().birthday(1, 5));
             p.setVrsta(vrste.get(sb(0, vrste.size()-1)));
-            p.setKolicina(new BigDecimal(faker.number().randomNumber()));
+            p.setKolicina(new BigDecimal(faker.number().numberBetween(0, 1000)));
             p.setOperater(operateri.get(sb(0, operateri.size()-1)));
             p.setProizvod(proizvodi.get(sb(0, proizvodi.size()-1)));
             session.persist(p);
